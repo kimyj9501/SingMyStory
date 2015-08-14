@@ -14,20 +14,20 @@ import android.webkit.DownloadListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 /**
- * Created by kyk on 15. 8. 12..
+ * Created by kyk on 15. 8. 13..
  */
-public class SubActivity1 extends Activity {
+public class SubActivity2 extends Activity {
     WebView myWebView;
-    public static Activity subActivity1;
+    public static Activity subActivity2;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sub1);
+        setContentView(R.layout.activity_sub2);
 
-        myWebView = (WebView) findViewById(R.id.webView2);
+        myWebView = (WebView) findViewById(R.id.webView3);
         myWebView.getSettings().setJavaScriptEnabled(true); // �ڹٽ�ũ��Ʈ�� ����� �� �ֵ��� ���ݴϴ�.
-        myWebView.loadUrl("http://singmystory.zz.mu/sing");     // ?�̰��� URL (http://abc/abc.html) �� �־� �մϴ�.
+        myWebView.loadUrl("http://singmystory.zz.mu/story");     // ?�̰��� URL (http://abc/abc.html) �� �־� �մϴ�.
         // file:///abc/abc.html ó�� ����� �� �ֽ��ϴ�.
         myWebView.setWebViewClient(new myWebViewClient());
         // �ٿ� �ε� �� �� �ֵ��� ���ִ� �Լ� ==================================
@@ -40,13 +40,12 @@ public class SubActivity1 extends Activity {
                 startActivity(intent);
             }
         });
-        /*SubActivity2 subActivity2 = (SubActivity2)SubActivity2.subActivity2;
-        if(subActivity2 != null){
-            subActivity2.finish();
+        /*SubActivity1 subActivity1 = (SubActivity1)SubActivity1.subActivity1;
+        if(subActivity1 != null){
+            subActivity1.finish();
         }
-        subActivity1 = SubActivity1.this;*/
+        subActivity2 = SubActivity2.this;*/
     }
-
     //button click event
     public void onClick(View view){
         switch (view.getId()){
@@ -86,8 +85,7 @@ public class SubActivity1 extends Activity {
             else if (url.contains("mailto:")) {
                 startActivity(new Intent(Intent.ACTION_SENDTO, Uri.parse(url)));
                 return true;
-            }
-            else {
+            } else {
                 view.loadUrl(url);
                 return true;
             }

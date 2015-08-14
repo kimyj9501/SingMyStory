@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
 
         myWebView = (WebView) findViewById(R.id.webView1);
         myWebView.getSettings().setJavaScriptEnabled(true); // �ڹٽ�ũ��Ʈ�� ����� �� �ֵ��� ���ݴϴ�.
-        myWebView.loadUrl("http://google.com");     // ?�̰��� URL (http://abc/abc.html) �� �־� �մϴ�.
+        myWebView.loadUrl("http://singmystory.zz.mu");     // ?�̰��� URL (http://abc/abc.html) �� �־� �մϴ�.
         // file:///abc/abc.html ó�� ����� �� �ֽ��ϴ�.
         myWebView.setWebViewClient(new myWebViewClient());
         // �ٿ� �ε� �� �� �ֵ��� ���ִ� �Լ� ==================================
@@ -38,12 +38,44 @@ public class MainActivity extends Activity {
             }
         });
     }
-    //button1 클릭
-    public void gotoSub1(View view){
+    //button click event
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.bottomButton1:
+
+                break;
+            case R.id.bottomButton2:
+                Intent intent1 = new Intent(this, SubActivity1.class);
+                intent1.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent1);
+                break;
+            case R.id.bottomButton3:
+                Intent intent5 = new Intent(this, MainActivity.class);
+                intent5.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent5);
+                break;
+            case R.id.bottomButton4:
+                Intent intent2 = new Intent(this, SubActivity2.class);
+                intent2.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent2);
+                break;
+            case R.id.bottomButton5:
+                
+                break;
+        }
+    }
+    /*public void gotoSing(View view){
         Intent intent = new Intent(this, SubActivity1.class);
         startActivity(intent);
     }
+    public void gotoStory(View view){
+        Intent intent = new Intent(this, SubActivity2.class);
+        startActivity(intent);
+    }
 
+    public void backClicked(View view){
+        finish();
+    }*/
 
     // ����̽� ����� back ��ư �ν� ===========================================
     @Override
