@@ -13,17 +13,17 @@ import android.view.View;
 import android.webkit.DownloadListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-public class MainActivity extends Activity {
+public class Sub3Activity extends Activity {
     WebView myWebView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_sub3);
         myWebView = (WebView) findViewById(R.id.webView1);
         myWebView.getSettings().setJavaScriptEnabled(true); // �ڹٽ�ũ��Ʈ�� ����� �� �ֵ��� ���ݴϴ�.
         myWebView.setHorizontalScrollBarEnabled(false);
         myWebView.setVerticalScrollBarEnabled(false);
-        myWebView.loadUrl("http://singmystory.zz.mu");     // ?�̰��� URL (http://abc/abc.html) �� �־� �մϴ�.
+        myWebView.loadUrl("http://singmystory.zz.mu/story");     // ?�̰��� URL (http://abc/abc.html) �� �־� �մϴ�.
         // file:///abc/abc.html ó�� ����� �� �ֽ��ϴ�.
         myWebView.setWebViewClient(new myWebViewClient());
         // �ٿ� �ε� �� �� �ֵ��� ���ִ� �Լ� ==================================
