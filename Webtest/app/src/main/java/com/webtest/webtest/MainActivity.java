@@ -1,5 +1,9 @@
 package com.webtest.webtest;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
@@ -17,21 +21,38 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
+import java.io.File;
+
 public class MainActivity extends Activity {
     WebView myWebView;
     private Handler mHandler;
     private boolean mFlag = false;
-    //private BackPressCloseHandler backPressCloseHandler;
+    //final Activity activity = this;
+    //ProgressDialog mProgress;
+    public MyProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //backPressCloseHandler = new BackPressCloseHandler(this);
+
+        String str = Environment.getExternalStorageState();
+        if ( str.equals(Environment.MEDIA_MOUNTED)) {
+
+            String dirPath = "/sdcard/SMS";
+            File file = new File(dirPath);
+            if( !file.exists() )  // 원하는 경로에 폴더가 있는지 확인
+                file.mkdirs();
+        }
+        else {
+            Toast.makeText(MainActivity.this, "SD Card 인식 실패", Toast.LENGTH_SHORT).show();
+        }
+
         myWebView = (WebView) findViewById(R.id.webView1);
         myWebView.getSettings().setJavaScriptEnabled(true); // �ڹٽ�ũ��Ʈ�� ����� �� �ֵ��� ���ݴϴ�.
         myWebView.setHorizontalScrollBarEnabled(false);
         myWebView.setVerticalScrollBarEnabled(false);
         myWebView.loadUrl("http://singmystory.zz.mu");     // ?�̰��� URL (http://abc/abc.html) �� �־� �մϴ�.
+        progressDialog = MyProgressDialog.show(this,"","",true,true,null);
         // file:///abc/abc.html ó�� ����� �� �ֽ��ϴ�.
         myWebView.setWebViewClient(new myWebViewClient());
         // �ٿ� �ε� �� �� �ֵ��� ���ִ� �Լ� ==================================
@@ -129,6 +150,33 @@ public class MainActivity extends Activity {
                 view.loadUrl(url);
                 return true;
             }
+        }
+
+        /*@Override
+        public void onPageStarted(WebView view, String url, Bitmap favicon){
+            if(mProgress==null){
+                mProgress = new ProgressDialog(activity);
+                mProgress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                mProgress.setTitle("Loading...");
+                mProgress.setMessage("Please wait for few second...");
+                mProgress.setCancelable(false);
+                mProgress.setButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        mProgress.dismiss();
+                    }
+                });
+                mProgress.show();
+            }
+        }*/
+        @Override
+        public void onPageFinished(WebView view, String url){
+            /*if(mProgress.isShowing()){
+                mProgress.dismiss();
+            }*/
+            myWebView.setVisibility(View.VISIBLE);
+            if (progressDialog!=null)
+            progressDialog.dismiss();
         }
     }
 }

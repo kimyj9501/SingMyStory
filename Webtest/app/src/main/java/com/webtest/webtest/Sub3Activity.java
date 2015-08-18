@@ -21,6 +21,7 @@ public class Sub3Activity extends Activity {
     WebView myWebView;
     private Handler mHandler;
     private boolean mFlag = false;
+    public MyProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +31,7 @@ public class Sub3Activity extends Activity {
         myWebView.setHorizontalScrollBarEnabled(false);
         myWebView.setVerticalScrollBarEnabled(false);
         myWebView.loadUrl("http://singmystory.zz.mu/story");     // ?�̰��� URL (http://abc/abc.html) �� �־� �մϴ�.
+        progressDialog = MyProgressDialog.show(this,"","",true,true,null);
         // file:///abc/abc.html ó�� ����� �� �ֽ��ϴ�.
         myWebView.setWebViewClient(new myWebViewClient());
         // �ٿ� �ε� �� �� �ֵ��� ���ִ� �Լ� ==================================
@@ -120,6 +122,15 @@ public class Sub3Activity extends Activity {
                 view.loadUrl(url);
                 return true;
             }
+        }
+        @Override
+        public void onPageFinished(WebView view, String url){
+            /*if(mProgress.isShowing()){
+                mProgress.dismiss();
+            }*/
+            myWebView.setVisibility(View.VISIBLE);
+            if (progressDialog!=null)
+                progressDialog.dismiss();
         }
     }
 }
